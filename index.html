@@ -1,22 +1,100 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="uk">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Я люблю Лізу</title>
-    <link rel="stylesheet" href="style.css" />
-  </head>
-  <body>
-    <main class="center">
-      <h1 class="title">Я люблю Лізу 💖</h1>
-      <p class="subtitle">назавжди та без варіантів</p>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Я люблю Лізу</title>
 
-      <button id="moreHearts" class="btn">Додати ще сердечок</button>
-    </main>
+<style>
+body {
+  margin: 0;
+  height: 100vh;
+  overflow: hidden;
+  font-family: Arial, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background: linear-gradient(135deg, #ff9acb, #ff6fa5, #ffb6d9);
+}
 
-    <div id="hearts-layer" aria-hidden="true"></div>
+h1 {
+  font-size: 80px;
+  color: white;
+  text-align: center;
+  text-shadow: 0 0 25px rgba(255,255,255,0.8);
+  z-index: 10;
+}
 
-    <script src="script.js"></script>
-  </body>
+button {
+  padding: 15px 30px;
+  font-size: 18px;
+  border: none;
+  border-radius: 30px;
+  background: white;
+  color: #ff4f9a;
+  cursor: pointer;
+  margin-top: 20px;
+  z-index: 10;
+  transition: 0.3s;
+}
+
+button:hover {
+  transform: scale(1.1);
+}
+
+.heart {
+  position: absolute;
+  font-size: 20px;
+  animation: fall linear forwards;
+}
+
+@keyframes fall {
+  from {
+    transform: translateY(-10vh);
+    opacity: 1;
+  }
+  to {
+    transform: translateY(110vh);
+    opacity: 0;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<h1>Я люблю Лізу 💖</h1>
+<button onclick="burstHearts()">Додати ще сердечок</button>
+
+<script>
+function createHeart() {
+  const heart = document.createElement("div");
+  heart.classList.add("heart");
+
+  const hearts = ["💖","💗","💓","💘","💝","💕","❤️"];
+  heart.innerHTML = hearts[Math.floor(Math.random() * hearts.length)];
+
+  heart.style.left = Math.random() * 100 + "vw";
+  heart.style.fontSize = (Math.random() * 40 + 20) + "px";
+  heart.style.animationDuration = (Math.random() * 3 + 3) + "s";
+
+  document.body.appendChild(heart);
+
+  setTimeout(() => {
+    heart.remove();
+  }, 6000);
+}
+
+function burstHearts() {
+  for (let i = 0; i < 30; i++) {
+    setTimeout(createHeart, i * 100);
+  }
+}
+
+// Автоматично сипляться
+setInterval(createHeart, 500);
+</script>
+
+</body>
 </html>
-
