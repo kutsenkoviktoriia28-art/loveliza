@@ -1,1 +1,104 @@
+:root {
+  --bg1: #0f1020;
+  --bg2: #1b1d3a;
+  --text: #ffffff;
+  --muted: rgba(255, 255, 255, 0.75);
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  height: 100%;
+  margin: 0;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  color: var(--text);
+}
+
+body {
+  background: radial-gradient(1200px 800px at 20% 10%, #2a2f7a 0%, transparent 60%),
+              radial-gradient(900px 700px at 80% 90%, #7a2a5f 0%, transparent 60%),
+              linear-gradient(135deg, var(--bg1), var(--bg2));
+  overflow: hidden;
+}
+
+.center {
+  position: relative;
+  z-index: 2;
+  height: 100%;
+  display: grid;
+  place-content: center;
+  text-align: center;
+  gap: 14px;
+  padding: 24px;
+}
+
+.title {
+  font-size: clamp(36px, 6vw, 72px);
+  margin: 0;
+  letter-spacing: 0.5px;
+  text-shadow: 0 10px 35px rgba(0,0,0,0.5);
+}
+
+.subtitle {
+  margin: 0;
+  font-size: clamp(16px, 2vw, 20px);
+  color: var(--muted);
+}
+
+.btn {
+  margin: 10px auto 0;
+  padding: 12px 18px;
+  border: 1px solid rgba(255,255,255,0.25);
+  background: rgba(255,255,255,0.08);
+  color: var(--text);
+  border-radius: 999px;
+  cursor: pointer;
+  backdrop-filter: blur(10px);
+  transition: transform 0.08s ease, background 0.2s ease;
+}
+
+.btn:hover { background: rgba(255,255,255,0.12); }
+.btn:active { transform: scale(0.98); }
+
+/* Hearts layer */
+#hearts-layer {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.heart {
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  transform: rotate(45deg);
+  opacity: 0.9;
+  filter: drop-shadow(0 8px 10px rgba(0,0,0,0.35));
+  animation: floatUp linear forwards;
+}
+
+.heart::before,
+.heart::after {
+  content: "";
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  background: inherit;
+  border-radius: 50%;
+}
+
+.heart::before { left: -9px; top: 0; }
+.heart::after  { left: 0; top: -9px; }
+
+@keyframes floatUp {
+  from {
+    transform: translateY(0) rotate(45deg) scale(var(--s, 1));
+    opacity: 0.95;
+  }
+  to {
+    transform: translateY(-120vh) rotate(45deg) scale(var(--s, 1));
+    opacity: 0;
+  }
+}
 
